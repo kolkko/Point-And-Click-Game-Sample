@@ -1,0 +1,3 @@
+/home/workspace/sdl_tutorials/build/CMakeFiles/rebuild_cache.dir
+/home/workspace/sdl_tutorials/build/CMakeFiles/Twinklebear.dir
+/home/workspace/sdl_tutorials/build/CMakeFiles/edit_cache.dir
