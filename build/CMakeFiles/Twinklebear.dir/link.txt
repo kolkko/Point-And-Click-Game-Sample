@@ -1,1 +1,0 @@
-/usr/bin/g++-7  -std=c++17   CMakeFiles/Twinklebear.dir/Lesson0/src/main.cpp.o  -o Twinklebear -L/usr/lib/x86_64-linux-gnu  -lSDL2 

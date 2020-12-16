@@ -1,1 +1,0 @@
-/usr/bin/g++-7  -std=c++17  -rdynamic CMakeFiles/Lesson0.dir/src/main.cpp.o  -o Lesson0 

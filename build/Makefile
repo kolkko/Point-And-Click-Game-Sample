@@ -48,10 +48,10 @@ RM = /usr/local/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/workspace/sdl_tutorials
+CMAKE_SOURCE_DIR = /home/workspace/CppND-Capstone-PointAndClickGame
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/workspace/sdl_tutorials/build
+CMAKE_BINARY_DIR = /home/workspace/CppND-Capstone-PointAndClickGame/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -67,6 +67,30 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/local/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/local/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/local/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/local/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -78,11 +102,33 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/local/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/local/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/workspace/sdl_tutorials/build/CMakeFiles /home/workspace/sdl_tutorials/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/workspace/CppND-Capstone-PointAndClickGame/build/CMakeFiles /home/workspace/CppND-Capstone-PointAndClickGame/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/workspace/sdl_tutorials/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/workspace/CppND-Capstone-PointAndClickGame/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,44 +157,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Twinklebear
+# Target rules for targets named PointAndClickGame
 
 # Build rule for target.
-Twinklebear: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Twinklebear
-.PHONY : Twinklebear
+PointAndClickGame: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 PointAndClickGame
+.PHONY : PointAndClickGame
 
 # fast build rule for target.
-Twinklebear/fast:
-	$(MAKE) -f CMakeFiles/Twinklebear.dir/build.make CMakeFiles/Twinklebear.dir/build
-.PHONY : Twinklebear/fast
-
-Lesson0/src/main.o: Lesson0/src/main.cpp.o
-
-.PHONY : Lesson0/src/main.o
-
-# target to build an object file
-Lesson0/src/main.cpp.o:
-	$(MAKE) -f CMakeFiles/Twinklebear.dir/build.make CMakeFiles/Twinklebear.dir/Lesson0/src/main.cpp.o
-.PHONY : Lesson0/src/main.cpp.o
-
-Lesson0/src/main.i: Lesson0/src/main.cpp.i
-
-.PHONY : Lesson0/src/main.i
-
-# target to preprocess a source file
-Lesson0/src/main.cpp.i:
-	$(MAKE) -f CMakeFiles/Twinklebear.dir/build.make CMakeFiles/Twinklebear.dir/Lesson0/src/main.cpp.i
-.PHONY : Lesson0/src/main.cpp.i
-
-Lesson0/src/main.s: Lesson0/src/main.cpp.s
-
-.PHONY : Lesson0/src/main.s
-
-# target to generate assembly for a file
-Lesson0/src/main.cpp.s:
-	$(MAKE) -f CMakeFiles/Twinklebear.dir/build.make CMakeFiles/Twinklebear.dir/Lesson0/src/main.cpp.s
-.PHONY : Lesson0/src/main.cpp.s
+PointAndClickGame/fast:
+	$(MAKE) -f PointAndClickGame/CMakeFiles/PointAndClickGame.dir/build.make PointAndClickGame/CMakeFiles/PointAndClickGame.dir/build
+.PHONY : PointAndClickGame/fast
 
 # Help Target
 help:
@@ -157,11 +176,12 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... Twinklebear"
+	@echo "... install/strip"
+	@echo "... install/local"
 	@echo "... edit_cache"
-	@echo "... Lesson0/src/main.o"
-	@echo "... Lesson0/src/main.i"
-	@echo "... Lesson0/src/main.s"
+	@echo "... list_install_components"
+	@echo "... install"
+	@echo "... PointAndClickGame"
 .PHONY : help
 
 
