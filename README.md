@@ -1,6 +1,6 @@
 # CPPND: Capstone Project (Option 1)
 
-This is a Capstone project for the [Udacity C++ Nanodegree Programme](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213). The Capstone Project was a chance to integrate some of the principles I learned throughout the Nanodegree Programme. The project I have built creates the beginnings of a point and click style game.
+This is a Capstone Project for the [Udacity C++ Nanodegree Programme](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213). The Capstone Project was a chance to integrate some of the principles I learned throughout the Nanodegree Programme. The project I have built creates the beginnings of a point and click style game.
 
 
 ## Dependencies for Running Locally
@@ -34,20 +34,20 @@ If building in your own environment, the following dependencies will be required
 
 ## Project Overview
 
-The functionality using SDL2 is based on tutorials from [Will Usher] (https://www.willusher.io/pages/sdl2/https://www.willusher.io/pages/sdl2/) and [Lazy Foo] (http://lazyfoo.net/tutorials/SDL/).
+The functionality using SDL2 is based on tutorials from [Will Usher](https://www.willusher.io/pages/sdl2/https://www.willusher.io/pages/sdl2/) and [Lazy Foo](http://lazyfoo.net/tutorials/SDL/).
 
 
 ## Expected Output
 
 This project is the starting point of a Point and Click game.
 
-<img src="readme_img0.gif"/>
+<img src="readme_img0.PNG"/>
 
-You should see a window with a drawing of a room in it. As you move the mouse over items that can be selected,
-they will become highlighted. When you click on an object it will remain highlighted until you click a second object
+As you move the mouse over items that can be selected they will become highlighted. 
+When you click on an object it will remain highlighted until you click a second object
 to use it with. The text will tell you if the match was correct. 
 
-<img src="readme_img1.gif"/>
+<img src="readme_img1.PNG"/>
 
 In this example there are only two objects, to demonstrate the functionality: a key and a keyhole. When you click either object and then the other, the result will be correct and the objects will return to their unhighlighted state.
 
