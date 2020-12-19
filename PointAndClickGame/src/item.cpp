@@ -17,6 +17,10 @@ std::string Item::itemDescription() {
     return _description;
 }
 
+SDL_Texture* Item::texture() {
+    return _spriteSheet;
+}
+
 int Item::xPosition() {
     return _itemPosition.x;
 }
@@ -34,9 +38,9 @@ void Item::renderItem(SDL_Renderer *ren) {
 		clip.y = 0;
 		}
 		else if (whichClip == 1 || whichClip == 2){
-		clip.x = 200;
+		clip.x = 110;
 		clip.y = 0;
 		}
-	std::cout << _name << ": " << whichClip << clip.x << std::endl;
+	//std::cout << _name << ": " << whichClip << clip.x << std::endl;
     renderTexture(_spriteSheet, ren, _itemPosition.x, _itemPosition.y, &clip);
 }

@@ -25,8 +25,8 @@ class LButton
         //void render();
 
         //Button constants
-        const int BUTTON_WIDTH = 200;
-        const int BUTTON_HEIGHT = 200;
+        const int BUTTON_WIDTH = 110;
+        const int BUTTON_HEIGHT = 110;
         const int TOTAL_BUTTONS = 4;
 
         enum LButtonSprite

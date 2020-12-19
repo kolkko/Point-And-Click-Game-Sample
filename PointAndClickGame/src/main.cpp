@@ -10,8 +10,10 @@
 #include "item.h"
 #include "lbutton.h"
 
-const int SCREEN_WIDTH = 1200;
-const int SCREEN_HEIGHT = 800;
+const int SCREEN_WIDTH = 1000;
+const int SCREEN_HEIGHT = 600;
+const std::string DEFAULT_FONT = "Langar-Regular.ttf";
+const int DEFAULT_FONT_SIZE = 30;
 const std::string DEFAULT_TEXT = "Hover over objects to see descriptions.";
 Housekeeping hk;
 
@@ -19,27 +21,35 @@ Housekeeping hk;
 std::string a = "NONE";
 std::string b = "NONE";
 
-void checkLogic() {
-	if (a == "Square") {
-		if (b == "Circle") {
+std::string checkLogic(std::string &a, std::string &b, std::vector<Item> &items) {
+	std::string description = "Incorrect!";
+	if (a == "Key") {
+		if (b == "Keyhole") {
 			std::cout << "Correct!" << std::endl;
+			description = "Correct!";
 		}
 		else {
 			std::cout << "Incorrect" << std::endl;
+			description = "Incorrect!";
 		}
 	}
-	if (a == "Circle") {
-				if (b == "Triangle") {
+	else if (a == "Keyhole") {
+				if (b == "Key") {
 			std::cout << "Correct!" << std::endl;
+			description = "Correct!";
 		}
 		else {
 			std::cout << "Incorrect" << std::endl;
+			description = "Incorrect!";
 		}
 	}
 
 	a = "NONE";
 	b = "NONE";
-}
+	for (auto & item : items) {
+		item.whichClip = 0;
+	}
+return description;}
 
 // Rubric point: The project demonstrates an understanding of C++ functions and control structures.
 int main(int, char**){
@@ -69,7 +79,7 @@ int main(int, char**){
 		return 1;
 	}
 
-	const std::string resPath = "../res/PointAndClickGame/";
+	const std::string resPath = "../resources/";
 	
 	// Load textures
 	Picture graphics;
@@ -77,30 +87,26 @@ int main(int, char**){
 	SDL_Texture *sprites_item1 = graphics.loadTexture(resPath + "item1.png", ren);
 	SDL_Texture *sprites_item2 = graphics.loadTexture(resPath + "item2.png", ren);
 
-	// Create items and store all in a vector
-	std::vector<Item> items;
-	Item item1("Square", "This is a square.", 50, 50, 200, 200, sprites_item1);
-	items.push_back(item1);
-	Item item2("Circle", "This is a circle.", 300, 300, 200, 200, sprites_item2);
-	items.push_back(item2);
-
-	//We'll render the string "TTF fonts are cool!" in white
-	//Color is in RGBA format
-	SDL_Color color = { 166, 71, 221, 1 };
-	Text boxText;
-	SDL_Texture *boxTexture = boxText.renderText(DEFAULT_TEXT, resPath + "sample.ttf", color, 40, ren);
-
-
-
-
 	// If there's an error, clean all up
-	if (background == nullptr){
+	if (background == nullptr || sprites_item1 == nullptr || sprites_item2 == nullptr){
 		hk.cleanUp(background, ren, win);
 		SDL_Quit();
 		return 1;
 	}
 
-	
+	// Create items and store all in a vector
+	std::vector<Item> items;
+	Item item1("Key", "A large brass key, hanging on the wall.", 640, 235, 110, 110, sprites_item1);
+	items.push_back(item1);
+	Item item2("Keyhole", "A keyhole in a sturdy wood door.", 492, 290, 110, 110, sprites_item2);
+	items.push_back(item2);
+
+	// Set up default text 
+	// Color is in RGBA format
+	SDL_Color color = { 0, 0, 0, 0 };
+	Text boxText;
+	SDL_Texture *boxTexture = boxText.renderText(DEFAULT_TEXT, resPath + DEFAULT_FONT, color, DEFAULT_FONT_SIZE, ren);
+
 	SDL_Event e;
 	LButton mouse;
 	bool quit = false;
@@ -117,21 +123,23 @@ int main(int, char**){
 			if (e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN ){
 				// Determine if item should be highlighted and set text
 				descText = DEFAULT_TEXT;
-				for(int i = 0; i < items.size(); i++) {
+				for(auto & item : items) {
 					SDL_Point item_position;
-					item_position.x = items[i].xPosition();
-					item_position.y = items[i].yPosition();
-					items[i].whichClip = mouse.handleEvent(&e, item_position);
-					if (items[i].whichClip == 1) {
-						descText = items[i].itemDescription();
+					item_position.x = item.xPosition();
+					item_position.y = item.yPosition();
+					if (item.whichClip != 2) {
+						item.whichClip = mouse.handleEvent(&e, item_position);
 					}
-					else if (items[i].whichClip == 2) {
+					if (item.whichClip == 1) {
+						descText = item.itemDescription();
+					}
+					else if (item.whichClip == 2) {
 						descText = "Item selected";
 						if (a == "NONE") {
-							a = items[i].itemName();
+							a = item.itemName();
 						}
-						else if (b == "NONE") {
-							b = items[i].itemName();
+						else if (b == "NONE" && a != item.itemName()) {
+							b = item.itemName();
 						}
 					}
 				}
@@ -141,22 +149,26 @@ int main(int, char**){
 		graphics.renderTexture(background, ren, 0, 0);	
 
 		// Render item and box text
-		for(int i = 0; i < items.size(); i++) {
-			items[i].renderItem(ren);
+		for(auto & item : items) {
+			item.renderItem(ren);
 		}
-		boxTexture = boxText.renderText(descText, resPath + "sample.ttf", color, 40, ren);
+		boxTexture = boxText.renderText(descText, resPath + DEFAULT_FONT, color, DEFAULT_FONT_SIZE, ren);
 		Picture displayText;
-		displayText.renderTexture(boxTexture, ren, 300, 0);
+		displayText.renderTexture(boxTexture, ren, 10, 10);
 
 		SDL_RenderPresent(ren);
 
 		// Check if 2 items are selected
 		if (a != "NONE" && b != "NONE") {
-			checkLogic();
+			std::cout << "Checking logic" << std::endl;
+			descText = checkLogic(a, b, items);
 		}
 	}
 
 	hk.cleanUpTexture(background);
+	for (auto & item : items) {
+		hk.cleanUpTexture(item.texture());
+	}
 	hk.cleanUpRenWin(ren, win);
 	TTF_Quit();
 	SDL_Quit();

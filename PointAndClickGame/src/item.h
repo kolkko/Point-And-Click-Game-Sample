@@ -14,26 +14,17 @@ class Item : public Picture {
     public:
         // Rubric point: Class constructors utilize member initialization lists.
         Item(std::string name, std::string description, int xPosition, int yPosition, int w, int h, SDL_Texture *sheet);
-        // destructor
-        // getter
+        // getters
         std::string itemName();
         std::string itemDescription();
+        SDL_Texture* texture();
         int xPosition();
         int yPosition();
-
         // render item on screen
         void renderItem(SDL_Renderer *ren);
-
-        // display item (call in constructor)
-        // hide item
-        // highlight
-        // show text
-        // useWith
-        // use
-
         int whichClip = 0;
 
-    //private:
+    private:
         std::string _name;
         std::string _description;
         std::vector<Item> _useWith;
@@ -43,10 +34,6 @@ class Item : public Picture {
         int _w; 
         int _h;
         SDL_Texture *_spriteSheet;
-
-
-
-
 };
 
 #endif
