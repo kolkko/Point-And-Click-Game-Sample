@@ -34,12 +34,10 @@ If building in your own environment, the following dependencies will be required
 
 ## Project Overview
 
-The functionality using SDL2 is based on tutorials from [Will Usher](https://www.willusher.io/sdl2%20tutorials/2013/08/17/lesson-1-hello-world) and [Lazy Foo](http://lazyfoo.net/tutorials/SDL/).
+This project is the bare bones of a point and click game. I created it to help me learn how to use SDL2 and reinforce my C++ knowledge. The functionality using SDL2 is based on tutorials from [Will Usher](https://www.willusher.io/sdl2%20tutorials/2013/08/17/lesson-1-hello-world) and [Lazy Foo](http://lazyfoo.net/tutorials/SDL/).
 
 
 ## Expected Output
-
-This project is the starting point of a Point and Click game.
 
 <img src="readme_img0.PNG"/>
 
