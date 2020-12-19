@@ -56,6 +56,7 @@ In this example there are only two objects, to demonstrate the functionality: a 
 |   +-- src
 |   +-- CMakeLists.txt
 +-- resources
++-- cmake
 +-- CMakeLists.txt
 +-- README.md
   ```
