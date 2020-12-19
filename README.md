@@ -34,7 +34,7 @@ If building in your own environment, the following dependencies will be required
 
 ## Project Overview
 
-The functionality using SDL2 is based on tutorials from [Will Usher](https://www.willusher.io/pages/sdl2/https://www.willusher.io/pages/sdl2/) and [Lazy Foo](http://lazyfoo.net/tutorials/SDL/).
+The functionality using SDL2 is based on tutorials from [Will Usher](https://www.willusher.io/sdl2%20tutorials/2013/08/17/lesson-1-hello-world) and [Lazy Foo](http://lazyfoo.net/tutorials/SDL/).
 
 
 ## Expected Output
