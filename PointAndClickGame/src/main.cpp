@@ -23,25 +23,13 @@ std::string b = "NONE";
 
 std::string checkLogic(std::string &a, std::string &b, std::vector<Item> &items) {
 	std::string description = "Incorrect!";
-	if (a == "Key") {
-		if (b == "Keyhole") {
-			std::cout << "Correct!" << std::endl;
-			description = "Correct!";
-		}
-		else {
-			std::cout << "Incorrect" << std::endl;
-			description = "Incorrect!";
-		}
+	if (a == "Key" && b == "Keyhole") {
+		std::cout << "Correct!" << std::endl;
+		description = "Correct!";
 	}
-	else if (a == "Keyhole") {
-				if (b == "Key") {
+	else if (a == "Keyhole" && b == "Key") {
 			std::cout << "Correct!" << std::endl;
 			description = "Correct!";
-		}
-		else {
-			std::cout << "Incorrect" << std::endl;
-			description = "Incorrect!";
-		}
 	}
 	else {
 		std::cout << "Incorrect" << std::endl;
@@ -58,14 +46,14 @@ return description;
 
 // Set text to display
 std::string setText(std::vector<Item> items) {
-	std::string descText;
+	std::string description;
 	bool hover;
 	bool selected;
 	// Is an item selected? Is an item being hovered over?
 	for (auto & item : items) {
 		if (item.whichClip == 1) {
 			hover = true;
-			descText = item.itemDescription();
+			description = item.itemDescription();
 		}
 		else if (item.whichClip == 2) {
 			selected = true;
@@ -73,15 +61,15 @@ std::string setText(std::vector<Item> items) {
 	}
 	// Hover gets precedence over other text
 	if (hover) {
-		return descText;
+		return description;
 	}
 	else if (selected) {
-		descText = "Item selected.";
-		return descText;
+		description = "Item selected.";
+		return description;
 	}
 	else {
-		descText = DEFAULT_TEXT;
-		return descText;
+		description = DEFAULT_TEXT;
+		return description;
 	}
 }
 
@@ -178,25 +166,22 @@ int main(int, char**) {
 					}
 				}
 				descText = setText(items);
+				// Check if 2 items are selected
+				if (a != "NONE" && b != "NONE") {
+					std::cout << "Checking logic" << std::endl;
+					descText = checkLogic(a, b, items);
+				}
+			}	
+			SDL_RenderClear(ren);
+			graphics.renderTexture(background, ren, 0, 0);	
+			// Render item and box text
+			for(auto & item : items) {
+				item.renderItem(ren);
 			}
-		}
-		SDL_RenderClear(ren);
-		graphics.renderTexture(background, ren, 0, 0);	
-
-		// Render item and box text
-		for(auto & item : items) {
-			item.renderItem(ren);
-		}
-		boxTexture = boxText.renderText(descText, resPath + DEFAULT_FONT, color, DEFAULT_FONT_SIZE, ren);
-		Picture displayText;
-		displayText.renderTexture(boxTexture, ren, 10, 10);
-
-		SDL_RenderPresent(ren);
-
-		// Check if 2 items are selected
-		if (a != "NONE" && b != "NONE") {
-			std::cout << "Checking logic" << std::endl;
-			descText = checkLogic(a, b, items);
+			boxTexture = boxText.renderText(descText, resPath + DEFAULT_FONT, color, DEFAULT_FONT_SIZE, ren);
+			Picture displayText;
+			displayText.renderTexture(boxTexture, ren, 10, 10);
+			SDL_RenderPresent(ren);
 		}
 	}
 
