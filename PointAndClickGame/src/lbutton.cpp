@@ -1,25 +1,21 @@
 #include "lbutton.h"
 
-LButton::LButton()
-{
+LButton::LButton() {
     mPosition.x = 0;
     mPosition.y = 0;
 
     mCurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
 }
 
-void LButton::setPosition( int x, int y )
-{
+void LButton::setPosition( int x, int y ) {
     mPosition.x = x;
     mPosition.y = y;
 }
 
-int LButton::handleEvent( SDL_Event* e, SDL_Point item_position )
-{
+int LButton::handleEvent( SDL_Event* e, SDL_Point item_position ) {
     int currentSprite = 0;
     //If mouse event happened
-    if( e->type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN )
-    {
+    if( e->type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN ) {
         //Get mouse position
         int x, y;
         SDL_GetMouseState( &x, &y );
@@ -46,16 +42,13 @@ int LButton::handleEvent( SDL_Event* e, SDL_Point item_position )
         }   
 
         //Mouse is outside button
-        if( !inside )
-        {
+        if( !inside ) {
             currentSprite = 0;
         }
         //Mouse is inside button
-        else
-        {
+        else {
             //Set mouse over sprite
-            switch( e->type )
-            {
+            switch( e->type ) {
                 case SDL_MOUSEMOTION:
                 currentSprite = 1;
                 break;
@@ -69,9 +62,3 @@ int LButton::handleEvent( SDL_Event* e, SDL_Point item_position )
     }
     return currentSprite;
 }   
-
-/*void LButton::render()
-{
-    //Show current button sprite
-    gButtonSpriteSheetTexture.render( mPosition.x, mPosition.y, &gSpriteClips[ mCurrentSprite ] );
-}*/

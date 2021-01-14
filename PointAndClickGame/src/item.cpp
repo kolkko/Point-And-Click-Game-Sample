@@ -41,6 +41,5 @@ void Item::renderItem(SDL_Renderer *ren) {
 		clip.x = 110;
 		clip.y = 0;
 		}
-	//std::cout << _name << ": " << whichClip << clip.x << std::endl;
     renderTexture(_spriteSheet, ren, _itemPosition.x, _itemPosition.y, &clip);
 }

@@ -9,8 +9,7 @@
 #include "housekeeping.h"
 #include "item.h"
 
-class LButton
-{
+class LButton {
     public:
         //Constructor, initializes internal variables
         LButton();
@@ -29,8 +28,7 @@ class LButton
         const int BUTTON_HEIGHT = 110;
         const int TOTAL_BUTTONS = 4;
 
-        enum LButtonSprite
-        {
+        enum LButtonSprite {
             BUTTON_SPRITE_MOUSE_OUT = 0,
             BUTTON_SPRITE_MOUSE_OVER_MOTION = 1,
             BUTTON_SPRITE_MOUSE_DOWN = 2,
