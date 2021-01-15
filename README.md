@@ -43,11 +43,11 @@ This project is the bare bones of a point and click game. I created it to help m
 
 As you move the mouse over items that can be selected they will become highlighted. 
 When you click on an object it will remain highlighted until you click a second object
-to use it with. The text will tell you if the match was correct. 
+to use it with. The text will tell you if the match was correct and the objects will return to their unhighlighted state. 
 
 <img src="readme_img1.PNG"/>
 
-In this example there are only two objects, to demonstrate the functionality: a key and a keyhole. When you click either object and then the other, the result will be correct and the objects will return to their unhighlighted state.
+In this example there are three objects, to demonstrate the functionality: a key, a keyhole and a feather. If you select the key and the keyhole, the result will be correct. If you select the feather and either other object, the result will be incorrect.
 
 
 ## File Structure
