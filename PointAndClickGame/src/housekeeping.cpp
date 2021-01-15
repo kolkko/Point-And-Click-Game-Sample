@@ -1,8 +1,7 @@
 #include "housekeeping.h"
 
-// Log an SDL error with some error message to the output stream of our choice
-// msg is The error message to write, format will be msg error: SDL_GetError()
-void Housekeeping::logSDLError(const std::string &msg){
+// Log an SDL error with some error message
+void Housekeeping::logSDLError(const std::string &msg) {
 	std::cout << msg << " error: " << SDL_GetError() << std::endl;
 }
 
